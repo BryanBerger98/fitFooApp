@@ -1,0 +1,169 @@
+<ion-header>
+  <ion-toolbar color="favorite">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+      <ion-button *ngIf="recipe" (click)="onBackToRecipe()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Edition d'une recette</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="recipeForm" (ngSubmit)="onSaveRecipe()">
+    <ion-item class="ion-padding-horizontal ion-padding-top">
+      <ion-label color="favorite">
+          Informations globales
+      </ion-label>
+    </ion-item>
+
+    <div class="ion-padding-horizontal">
+      <div class="ion-padding-horizontal ion-padding-top">
+        <label class="recipeFormLabel">Titre</label>
+        <ion-input formControlName="title" type="text" class="recipeFormInput ion-padding-horizontal" placeholder="Ex: Ravioli ricotta épinard"></ion-input>
+      </div>
+      <div class="ion-padding-horizontal pt-3">
+        <ion-item lines="none" class="recipeSelect">
+          <ion-label>Portions</ion-label>
+          <ion-select formControlName="portions" value="portions" okText="OK" cancelText="Annuler">
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+            <ion-select-option value="5">5</ion-select-option>
+            <ion-select-option value="6">6</ion-select-option>
+            <ion-select-option value="8">8</ion-select-option>
+            <ion-select-option value="10">10</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="ion-padding-horizontal pt-3">
+        <ion-item lines="none" class="recipeSelect">
+          <ion-label>Repas</ion-label>
+          <ion-select formControlName="meal" value="meal" okText="OK" cancelText="Annuler">
+            <ion-select-option value="Petit déjeuner">Petit déjeuner</ion-select-option>
+            <ion-select-option value="Déjeuner">Déjeuner</ion-select-option>
+            <ion-select-option value="Dîner">Dîner</ion-select-option>
+            <ion-select-option value="Entrée">Entrée</ion-select-option>
+            <ion-select-option value="Dessert">Dessert</ion-select-option>
+            <ion-select-option value="Collation">Collation</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+    </div>
+
+    <ion-grid class="ion-padding-horizontal">
+      <ion-row class="ion-padding-horizontal">
+        <ion-col size="6">
+          <ion-item class="recipeSelect" lines="none">
+            <ion-label>Préparation</ion-label>
+            <ion-datetime formControlName="prepareTime" displayFormat="HH:mm"></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="recipeSelect" lines="none">
+            <ion-label>Temps global</ion-label>
+            <ion-datetime formControlName="globalTime" displayFormat="HH:mm"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item class="ion-padding-horizontal">
+      <ion-label color="favorite">
+          Ingrédients
+      </ion-label>
+    </ion-item>
+
+    <div class="ion-padding-horizontal">
+      <div class="ion-padding-horizontal ion-padding-top">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="8">
+              <ion-input type="text" class="recipeFormInput ion-padding-horizontal" placeholder="Ingédient" formControlName="ingredientName"></ion-input>
+            </ion-col>
+            <ion-col size="4">
+              <ion-input type="text" class="recipeFormInput ion-padding-horizontal" placeholder="Qté" formControlName="ingredientQty"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <ion-item lines="none" class="recipeSelect">
+                <ion-label>Unité</ion-label>
+                <ion-select formControlName="ingredientUnit" value="unit" okText="OK" cancelText="Annuler">
+                  <ion-select-option value="g" selected>g</ion-select-option>
+                  <ion-select-option value="kg">kg</ion-select-option>
+                  <ion-select-option value="L">L</ion-select-option>
+                  <ion-select-option value="cL">cL</ion-select-option>
+                  <ion-select-option value="mL">mL</ion-select-option>
+                  <ion-select-option value="cuillère à café">cuillère à café</ion-select-option>
+                  <ion-select-option value="cuillère à soupe">cuillère à soupe</ion-select-option>
+                  <ion-select-option value="aucun">aucun</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button color="favorite" class="ion-no-padding p-0" expand="block" (click)="onAddIngredient()">
+                <ion-icon name="add" slot="start"></ion-icon>
+                Ajouter
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" *ngFor="let ingredient of addedIngredients">
+              <ion-item class="ion-no-padding d-flex" color="light">
+                <ion-label text-wrap class="ion-padding-start">
+                  {{ ingredient.name }} <span *ngIf="ingredient.quantity">-</span> {{ ingredient.quantity }} <span *ngIf="ingredient.unit !== 'aucun'">{{ ingredient.unit }}</span>
+                </ion-label>
+                <ion-icon name="close" color="danger" style="cursor: pointer;" (click)="onRemoveIngredient()"></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+
+    <ion-item class="ion-padding-horizontal">
+      <ion-label color="favorite">
+          Etapes
+      </ion-label>
+    </ion-item>
+
+    <div class="ion-padding-horizontal ion-padding-top">
+      <div class="ion-padding-horizontal">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+              <ion-item lines="none" class="recipeFormInput">
+                <ion-textarea placeholder="Entrez les étapes ici" formControlName="step"></ion-textarea>
+              </ion-item>
+            </ion-col>
+            <ion-col size="3" class="d-flex">
+              <ion-button color="favorite" class="ion-no-padding p-0 m-auto stepBtn" shape="round" (click)="onAddStep()">
+                <ion-icon name="add" class="fs-30"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" *ngFor="let step of addedSteps">
+              <ion-item color="light" class="ion-no-padding d-flex">
+                <ion-label text-wrap class="ion-padding-start">
+                  {{ step }}
+                </ion-label>
+                <ion-icon name="close" color="danger" style="cursor: pointer;" (click)="onRemoveStep()"></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+
+    <ion-button type="submit" class="ion-padding ion-margin" color="favorite" expand="block">
+      Enregistrer
+    </ion-button>
+
+  </form>
+
+</ion-content>

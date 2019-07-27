@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="favorite">
+    <ion-title>Liste de courses</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item *ngIf="!shoppingList" lines="none" padding>
+    <p class="text-center">Vous n'avez pas encore ajouté de recette à la liste de courses</p>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" *ngFor="let ingredient of shoppingList; let i of index">
+        <ion-item lines="none">
+          <ion-icon name="square-outline" slot="start" (click)="changeIngCheckValue(i)" *ngIf="ingredient.isChecked === false"></ion-icon>
+          <ion-icon name="checkbox-outline" slot="start" (click)="changeIngCheckValue(i)" color="favorite" *ngIf="ingredient.isChecked === true"></ion-icon>
+          {{ ingredient.name }}
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "fitFood",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

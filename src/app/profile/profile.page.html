@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="favorite">
+    <ion-title>Profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" *ngIf="user">
+
+  <ion-item color="light" class="ion-padding-horizontal ion-padding-top" (click)="editProfile('lastname')">
+    <ion-label>
+      Nom
+    </ion-label>
+    <p class="font-300 my-0 ml-auto">
+      {{ user.lastname }}
+    </p>
+  </ion-item>
+
+  <ion-item color="light" class="ion-padding-horizontal"(click)="editProfile('firstname')">
+    <ion-label>
+      Prénom
+    </ion-label>
+    <p class="font-300 my-0 ml-auto">
+      {{ user.firstname }}
+    </p>
+  </ion-item>
+
+  <ion-item color="light" class="ion-padding-horizontal" (click)="editProfile('email')">
+    <ion-label>
+      Email
+    </ion-label>
+    <p class="font-300 my-0 ml-auto">
+      {{ user.email }}
+    </p>
+  </ion-item>
+
+  <ion-item color="light" class="ion-padding-horizontal" (click)="editProfile('phone')">
+    <ion-label>
+      Téléphone
+    </ion-label>
+    <p class="font-300 my-0 ml-auto">
+      {{ user.phone }}
+    </p>
+  </ion-item>
+
+  <ion-item color="light" class="ion-padding-horizontal" (click)="editProfile('birth')">
+    <ion-label>
+      Date de naissance
+    </ion-label>
+    <p class="font-300 my-0 ml-auto">
+      {{ user.birth | date : 'dd/MM/yyyy'}}
+    </p>
+  </ion-item>
+
+  <ion-item color="light" class="ion-padding-horizontal" (click)="editProfile('sex')">
+    <ion-label>
+      Sexe
+    </ion-label>
+    <p class="font-300 my-0 ml-auto">
+      {{ user.sex }}
+    </p>
+  </ion-item>
+
+  <ion-item color="light" class="ion-padding-horizontal">
+    <ion-label color="danger" (click)="onSignOut()">
+        Déconnexion
+    </ion-label>
+  </ion-item>
+
+  <ion-item color="light" class="ion-padding-horizontal">
+    <ion-label>
+      Mentions légales et conditions générales
+    </ion-label>
+  </ion-item>
+
+</ion-content>

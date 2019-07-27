@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="favorite">
+    <ion-title>Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" sizeMd="8" sizeLg="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="favorite">Créez votre compte !</ion-card-title>
+            <ion-card-subtitle>Nous avons hâte de goûter vos recettes !</ion-card-subtitle>
+          </ion-card-header>
+      
+          <ion-card-content>
+            
+            <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+              <label class="authLabel">Adresse email</label>
+              <ion-input type="text" placeholder="Adresse email" formControlName="email" class="authInput ion-padding-horizontal ion-margin-bottom"></ion-input>
+      
+              <label class="authLabel">Mot de passe</label>
+              <ion-input type="password" placeholder="Mot de passe" formControlName="password" class="authInput ion-padding-horizontal ion-margin-bottom"></ion-input>
+      
+              <label class="authLabel">Confirmer mot de passe</label>
+              <ion-input type="password" placeholder="Mot de passe" formControlName="passwordConfirm" class="authInput ion-padding-horizontal"></ion-input>
+      
+              <ion-button type="submit" color="favorite" expand="block" class="ion-margin-top">Inscription</ion-button>
+            </form>
+      
+            
+          </ion-card-content>
+        </ion-card>
+      
+        <div class="text-center">
+          <ion-button color="primary" class="signupBtn" (click)="facebookLogin()">
+            <ion-icon slot="start" name="logo-facebook"></ion-icon>
+            Connexion avec Facebook
+          </ion-button>
+      
+          <ion-button color="danger" class="signupBtn">
+            <ion-icon slot="start" name="logo-google"></ion-icon>
+            Connexion avec Google
+          </ion-button>
+        </div>
+      
+        <div class="linkToSignIn text-center">
+          <a [routerLink]="['/signin']" routerDirection="forward">Déjà un compte ? Se connecter</a>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

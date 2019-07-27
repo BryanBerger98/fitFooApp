@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="favorite">
+    <ion-title>Recettes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="position-relative">
+
+  <ion-grid>
+    <ion-row class="ion-padding-vertical">
+      <ion-col *ngFor="let recipe of allRecipes; let i = index" size="12" sizeMd="6" sizeLg="4">
+        <ion-card class="ion-no-margin">
+          <ion-item class="ion-padding-end">
+            <ion-card-header>
+              <ion-card-title color="favorite" class="fs-20">{{ recipe.title }}</ion-card-title>
+              <ion-card-subtitle>{{ recipe.meal }}</ion-card-subtitle>
+              
+            </ion-card-header>
+            <ion-icon (click)="onAddRecipeToShoppingList(i)" *ngIf="!recipe.toShop" name="bookmark" slot="end" class="bookmark"></ion-icon>
+            <ion-icon (click)="onRemoveRecipeFromShoppingList(i)" *ngIf="recipe.toShop" color="favorite" name="bookmark" slot="end" class="bookmark"></ion-icon>
+          </ion-item>
+
+          <ion-card-content>
+            <ion-item lines="none" class="fs-15">
+              <ion-icon class="fs-20" slot="start" name="pie"></ion-icon>
+              Portions : {{ recipe.portions }}
+            </ion-item>
+            <ion-item lines="none" class="fs-15">
+              <ion-icon class="fs-20" slot="start" name="time"></ion-icon>
+              Temps global : {{ recipe.globalTime | date : 'HH:mm' }}
+            </ion-item>
+            <div class="d-flex ion-padding-top">
+                <ion-button color="favorite" class="mx-auto" [routerLink]="['/recipe', i]">Voir la recette</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <button routerLink="/recipes/edit" class="bg-favorite rounded-circle text-whitesmoke position-fixed btnAddRecipe">
+    <ion-icon name="add" class="fs-35"></ion-icon>
+  </button>
+  
+</ion-content>

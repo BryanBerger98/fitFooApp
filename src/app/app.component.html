@@ -1,0 +1,23 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+
+  <ion-tabs *ngIf="loggedIn">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button [routerLink]="['/recipes']" routerDirection="forward">
+        <ion-icon name="flask"></ion-icon>
+        <ion-label>Recettes</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button [routerLink]="['/shopping']" routerDirection="forward">
+        <ion-icon name="pricetag"></ion-icon>
+        <ion-label>Liste de courses</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button [routerLink]="['/profile']" routerDirection="forward">
+        <ion-icon name="contact"></ion-icon>
+        <ion-label>Profil</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
+</ion-app>

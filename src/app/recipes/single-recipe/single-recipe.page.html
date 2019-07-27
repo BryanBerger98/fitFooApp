@@ -1,0 +1,66 @@
+<!-- <ion-text *ngIf="!loading">
+  <h1>Chargement...</h1>
+</ion-text> -->
+
+<ion-header *ngIf="recipe">
+  <ion-toolbar color="favorite">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+      <ion-button *ngIf="recipe" (click)="onBackToRecipe()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ recipe.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="recipe">
+  <ion-item *ngIf="recipe.portions" class="ion-padding-end" lines="none">
+    <ion-icon name="pie" slot="start"></ion-icon>
+    <p>{{ recipe.portions }} portion(s)</p>
+  </ion-item>
+  <ion-item *ngIf="recipe.prepareTime" class="ion-padding-end" lines="none">
+    <ion-icon name="time" slot="start"></ion-icon>
+    <p>{{ recipe.prepareTime | date : 'HH:mm' }} de préparation</p>
+  </ion-item>
+  <ion-item *ngIf="recipe.globalTime" class="ion-padding-end" lines="none">
+    <ion-icon name="timer" slot="start"></ion-icon>
+    <p>{{ recipe.globalTime | date : 'HH:mm' }} au total</p>
+  </ion-item>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title color="favorite" class="fs-20">Ingédients</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content class="ion-no-padding">
+      <ion-item color="light" class="ion-padding" lines="none" *ngFor="let ingredient of recipe.ingredients">
+        {{ ingredient.name }} <span *ngIf="ingredient.quantity">- {{ ingredient.quantity}}</span> <span *ngIf="ingredient.unit !== 'aucun'">{{ ingredient.unit }}</span>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title color="favorite" class="fs-20">Etapes</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content class="ion-no-padding ion-padding-bottom">
+      <ion-item color="light" class="ion-padding" lines="none" *ngFor="let step of recipe.steps">
+        {{ step }}
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button color="tertiary" expand="block" (click)="onEditRecipe()">Modifier</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button color="danger" expand="block" (click)="presentAlertConfirm()">Supprimer</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
